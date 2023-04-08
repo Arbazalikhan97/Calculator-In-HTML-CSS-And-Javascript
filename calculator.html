@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculator</title>
+  <link rel="stylesheet" type="text/css" href="calculator.css">
+</head>
+<body>
+<div class="calculator">
+  <input type="text" id="result" readonly>
+  <button class="btn" onclick="handleNumber('7')">7</button>
+<button class="btn" onclick="handleNumber('8')">8</button>
+<button class="btn" onclick="handleNumber('9')">9</button>
+<button class="btn" onclick="handleOperator('/')">/</button>
+<button class="btn" onclick="handleNumber('4')">4</button>
+<button class="btn" onclick="handleNumber('5')">5</button>
+<button class="btn" onclick="handleNumber('6')">6</button>
+<button class="btn" onclick="handleOperator('*')">*</button>
+<button class="btn" onclick="handleNumber('1')">1</button>
+<button class="btn" onclick="handleNumber('2')">2</button>
+<button class="btn" onclick="handleNumber('3')">3</button>
+<button class="btn" onclick="handleOperator('-')">-</button>
+<button class="btn" onclick="handleNumber('0')">0</button>
+<button class="btn" onclick="handleOperator('.')">.</button>
+<button class="btn" onclick="handleOperator('+')">+</button>
+<button class="btn" onclick="handleClear()">C</button>
+<button class="btn" onclick="handleCalculate()">=</button>
+
+</div>
+
+<script type="text/javascript">
+  
+let currentNumber = '';
+let storedNumber = '';
+let currentOperator = '';
+const result = document.getElementById('result');
+
+function handleNumber(num) {
+  currentNumber += num;
+  result.value = currentNumber;
+}
+
+function handleOperator(op) {
+  if (currentOperator === '') {
+    storedNumber = currentNumber;
+    currentNumber = '';
+    currentOperator = op;
+  } else {
+    handleCalculate();
+    currentOperator = op;
+  }
+}
+
+function handleClear() {
+  currentNumber = '';
+  storedNumber = '';
+  currentOperator = '';
+  result.value = '';
+}
+
+function handleCalculate() {
+  let num1 = parseFloat(storedNumber);
+  let num2 = parseFloat(currentNumber);
+  let resultValue;
+  switch (currentOperator) {
+    case '+':
+      resultValue = num1 + num2;
+      break;
+    case '-':
+      resultValue = num1 - num2;
+      break;
+    case '*':
+      resultValue = num1 * num2;
+      break;
+  }
+  result.value = resultValue;
+  storedNumber = resultValue.toString();
+  currentNumber = '';
+  currentOperator = '';
+}
+
+</script>
+</body>
+</html>
